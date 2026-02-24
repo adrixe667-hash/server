@@ -98,20 +98,29 @@ La interfaz debería incluir estos módulos:
    - Edición de archivos (`server.properties`, `ops.json`, whitelist, etc.).
    - Programación de reinicios y tareas.
 
-4. **Plugins / mods / packs**
+4. **Administración de chat (Minecraft)**
+   - Acciones rápidas desde panel y consola: **dar OP**, **quitar OP**, **dar ítems**, **kick**, **ban**, **mute**.
+   - Comandos preconfigurados sugeridos:
+     - `/op <jugador>`
+     - `/deop <jugador>`
+     - `/give <jugador> <item> <cantidad>`
+   - Historial/auditoría de comandos administrativos ejecutados desde el panel.
+
+5. **Plugins / mods / packs**
    - Carga por archivo o URL.
    - Perfiles por tipo de servidor.
+   - Validación de compatibilidad por versión (loader + API + versión de servidor).
 
-5. **Skins personalizadas (Minecraft)**
+6. **Skins personalizadas (Minecraft)**
    - Selector para modo premium (`online-mode=true`) o modo compatible con no-premium (`online-mode=false`).
    - Soporte de skins personalizadas mediante plugin/proxy (por ejemplo SkinRestorer en entornos no-premium).
    - Opción de política: permitir solo skins oficiales, o habilitar skins personalizadas por servidor.
 
-6. **Backups y restauración**
+7. **Backups y restauración**
    - Backups automáticos por horario.
    - Restaurar con 1 clic.
 
-7. **Usuarios y permisos**
+8. **Usuarios y permisos**
    - Owner/Admin/Moderador/Viewer.
    - Auditoría de acciones (logs de panel).
 
@@ -199,9 +208,11 @@ Para una experiencia realmente “tipo Crafty”:
 - [ ] Editor web de archivos de configuración.
 - [ ] Consola RCON/STDIN integrada en panel.
 - [ ] Botones directos en UI: Encender / Apagar / Reiniciar / Forzar apagado.
+- [ ] Acciones admin de chat: dar/quitar OP, dar ítems, ban/kick/mute con auditoría.
 - [ ] Sistema de tareas programadas (backup/restart/update).
 - [ ] Control de acceso por usuarios y roles.
 - [ ] Soporte de skins personalizadas con política configurable por servidor.
+- [ ] Compatibilidad de mods validada por versión y tipo de loader (Forge/Fabric/NeoForge).
 - [ ] Logs centralizados y exportables.
 
 ---
@@ -214,9 +225,42 @@ Para una experiencia realmente “tipo Crafty”:
 - Implementar backups incrementales + snapshots diarios.
 - Limitar recursos por instancia para evitar caídas globales.
 
+### Seguridad recomendada para **todos** los servidores
+
+- Activar firewall por host/proyecto (UFW o nftables) con política deny-by-default.
+- Aislar cada instancia en red Docker propia y abrir solo puertos necesarios.
+- Habilitar autenticación fuerte en panel (2FA) + contraseñas robustas.
+- Usar roles mínimos necesarios (principio de mínimo privilegio).
+- Configurar antispam/antibot y protección DDoS en capa proxy/túnel.
+- Aplicar actualizaciones regulares de imágenes, plugins y panel.
+- Mantener rotación de logs + alertas automáticas (caídas, picos RAM/CPU, intentos fallidos).
+
 ---
 
-## 8) Integración con MineColab_Improved
+## 8) Publicación online y túneles compatibles
+
+Opciones recomendadas para exponer servidores privados/públicos:
+
+1. **playit.gg**
+   - Útil cuando no puedes abrir puertos o estás detrás de CGNAT.
+   - Configuración rápida para publicar puertos de juego.
+
+2. **Cloudflare Tunnel**
+   - Recomendado para panel web y APIs administrativas con HTTPS.
+   - Ideal para ocultar IP real del host.
+
+3. **Tailscale / Headscale**
+   - Excelente para administración privada entre administradores.
+   - Acceso seguro sin exponer puertos de gestión.
+
+4. **IP pública + NAT/port forwarding**
+   - Opción clásica con máximo control, requiere hardening completo.
+
+> Sugerencia práctica: usar Cloudflare Tunnel para el panel, y playit.gg o puertos directos solo para tráfico de juego.
+
+---
+
+## 9) Integración con MineColab_Improved
 
 Para migrar desde la base indicada:
 
@@ -230,7 +274,7 @@ Resultado: misma facilidad de uso, pero más robusto, portable y fácil de escal
 
 ---
 
-## 9) Comandos operativos rápidos
+## 10) Comandos operativos rápidos
 
 ```bash
 # Levantar toda la plataforma
@@ -251,13 +295,15 @@ tar -czf backups/mc-survival-$(date +%F-%H%M).tar.gz data/minecraft-survival
 
 ---
 
-## 10) Resumen final
+## 11) Resumen final
 
 Si buscas algo “como Crafty” pero adaptable a Minecraft y juegos similares:
 
 - Usa panel amigable + contenedores por servidor.
 - Añade monitoreo en tiempo real con Grafana/Prometheus.
 - Implementa roles, backups, consola web y plantillas.
+- Añade funciones admin de chat (OP, deOP, give, kick, ban, mute) con auditoría.
 - Ajusta compatibilidad de launcher según versión/mods/autenticación.
+- Publica con playit.gg, Cloudflare Tunnel, Tailscale o puertos directos según tu red.
 
 Con esta base tendrás una experiencia de administración sencilla para usuarios finales y suficiente control para personalización avanzada.
