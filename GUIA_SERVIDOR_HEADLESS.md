@@ -9,6 +9,12 @@ Base de referencia solicitada:
 ---
 
 
+## Documentación organizada del proyecto
+
+- `README.md`: visión general y arranque rápido.
+- `docs/USO_PROYECTO.md`: creación/uso funcional paso a paso.
+- `docs/GUIA_CRAFTY_OPTIMIZACION.md`: guía dedicada para optimización y uso de Crafty.
+
 ## Implementación incluida en este repositorio
 
 Además de la guía, este repositorio ya incluye una base funcional:

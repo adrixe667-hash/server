@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-scripts/check_dependencies.sh || true
+scripts/check_dependencies.sh
 
 if [[ ! -f .env ]]; then
   cp .env.example .env
-  echo "Se creó .env desde .env.example. Edita contraseñas antes de producción."
+  echo "Se creó .env desde .env.example."
 fi
 
 # Validar nombre compatible
@@ -15,10 +15,14 @@ if [[ -z "$MC_NAME_VAL" || ! "$MC_NAME_VAL" =~ ^[a-z0-9-]+$ ]]; then
   exit 1
 fi
 
+# shellcheck disable=SC1091
+source .env
+MODE="${PANEL_MODE:-nocrafty}"
+
 docker compose config >/dev/null
 
 echo "Configuración válida."
-echo "Siguientes pasos:"
-echo "  1) docker compose up -d"
-echo "  2) Panel: https://localhost:9443"
-echo "  3) Grafana: http://localhost:3000"
+echo "Crea servidor si quieres cambiar parámetros:"
+echo "  scripts/create_server.sh <nombre> <tipo> <ram> <puerto> <crafty|nocrafty>"
+echo "Levantar stack:"
+echo "  scripts/stack.sh up $MODE"
