@@ -428,3 +428,65 @@ Si buscas algo “como Crafty” pero adaptable a Minecraft y juegos similares:
 - Publica con playit.gg, Cloudflare Tunnel, Tailscale o puertos directos según tu red.
 
 Con esta base tendrás una experiencia de administración sencilla para usuarios finales y suficiente control para personalización avanzada.
+
+---
+
+## 15) Ideas para mejorar el proyecto (roadmap recomendado)
+
+Si quieres subir el nivel del proyecto de "guía" a "plataforma sólida", estas son mejoras con alto impacto:
+
+### Prioridad alta (rápidas y útiles)
+
+1. **Plantillas 1-clic por tipo de servidor**
+   - Vanilla, Paper, Purpur, Fabric, NeoFabric, NeoForge.
+   - Cada plantilla con validaciones mínimas (versión, RAM, puertos, whitelist).
+
+2. **Asistente de diagnóstico automático**
+   - Botón `Diagnosticar` que revise:
+     - puertos ocupados,
+     - errores de permisos,
+     - conflictos de mods/plugins,
+     - falta de memoria.
+
+3. **Backups con retención inteligente**
+   - Política por defecto: diarios (7), semanales (4), mensuales (3).
+   - Restauración guiada con vista previa de fecha/tamaño.
+
+4. **Alertas en tiempo real**
+   - Telegram/Discord/email para:
+     - servidor caído,
+     - RAM > 85%,
+     - CPU alta sostenida,
+     - backup fallido.
+
+### Prioridad media (escalabilidad)
+
+5. **Sistema de plugins del panel**
+   - Permitir módulos externos para comandos, tickets, economía, etc.
+
+6. **Panel multi-nodo**
+   - Un panel central para gestionar varios hosts.
+   - Balanceo por carga para repartir instancias.
+
+7. **Marketplace privado de plantillas/modpacks**
+   - Catálogo interno con versiones verificadas.
+   - Instalación con un clic y rollback.
+
+### Prioridad avanzada (nivel producción)
+
+8. **CI/CD para actualizaciones seguras**
+   - Pipeline de pruebas de arranque antes de aplicar updates en producción.
+
+9. **Observabilidad avanzada**
+   - Dashboards por jugador/latencia/TPS y trazas de eventos críticos.
+
+10. **Hardening completo de seguridad**
+   - SSO/OAuth2 para panel, rotación automática de secretos y auditoría centralizada.
+
+### Métrica de éxito recomendada
+
+- Tiempo de creación de servidor: **< 3 minutos**.
+- Tasa de fallos por actualización: **< 5%**.
+- Tiempo medio de recuperación (MTTR): **< 10 minutos**.
+- Éxito de backups: **> 99%**.
+
