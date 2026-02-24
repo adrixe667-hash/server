@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel de Servidores - Esqueleto</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Panel de Servidores (Esqueleto UI)</h1>
+    <div class="status-pill">Estado API: <span id="apiStatus">No conectado</span></div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar card">
+      <h2>Acciones rápidas</h2>
+      <button data-action="create">Crear servidor</button>
+      <button data-action="start">Encender</button>
+      <button data-action="stop">Apagar</button>
+      <button data-action="restart">Reiniciar</button>
+      <button data-action="backup">Backup ahora</button>
+      <button data-action="validate">Validar proyecto</button>
+    </aside>
+
+    <section class="content">
+      <section class="card">
+        <h2>Resumen</h2>
+        <div class="grid">
+          <div><strong>Servidores:</strong> <span id="serversCount">0</span></div>
+          <div><strong>Modo:</strong> <span id="modeValue">nocrafty</span></div>
+          <div><strong>Monitoreo:</strong> <span id="monitoringValue">habilitado</span></div>
+          <div><strong>Home Assistant:</strong> <span id="haValue">deshabilitado</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Servidores</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Puerto</th>
+              <th>Estado</th>
+              <th>CPU</th>
+              <th>RAM</th>
+            </tr>
+          </thead>
+          <tbody id="serversTable">
+            <tr><td colspan="6">Sin datos (conecta backend/API para poblar).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Consola / Logs</h2>
+        <pre id="consoleOutput">[INFO] Aquí aparecerán logs del servidor y salida de comandos...</pre>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Este es un esqueleto visual. Integra endpoints de tus scripts para funcionalidad completa.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

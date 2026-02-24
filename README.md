@@ -16,6 +16,9 @@ scripts/create_server.sh mc-survival PAPER 6G 25565 nocrafty
 scripts/stack.sh up nocrafty
 ```
 
+Esqueleto UI de administración:
+- `http://localhost:8088` (modo `nocrafty`)
+
 ## Comprobación integral del proyecto
 
 ```bash

@@ -37,6 +37,18 @@ services:
       - ./data/portainer:/data
     restart: unless-stopped
 
+
+  # Esqueleto de página de visualización/administración
+  admin_ui:
+    profiles: ["nocrafty"]
+    image: nginx:alpine
+    container_name: admin-ui
+    ports:
+      - "8088:80"
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
   # Modo con Crafty: panel de gaming dedicado
   crafty:
     profiles: ["crafty"]

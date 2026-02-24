@@ -13,6 +13,7 @@ Esta guía quedó sintetizada para uso real: crear, optimizar y operar servidore
 - `scripts/backup.sh`: backup con retención.
 - `scripts/ha_event.sh`: eventos a Home Assistant.
 - `scripts/validate_project.sh`: validación integral del proyecto.
+- `web/index.html`: esqueleto de página de visualización/administración (modo no-Crafty).
 
 ## 2) Modo Crafty vs no-Crafty
 
@@ -106,7 +107,16 @@ HA_WEBHOOK_URL="https://ha.tudominio/api/webhook/mc_event" \
   scripts/ha_event.sh server_up "Servidor iniciado"
 ```
 
-## 10) Dónde ver más detalle
+## 10) Esqueleto de página de visualización y administración
+
+- Ruta: `web/index.html`
+- Estilos: `web/styles.css`
+- Interacción base: `web/app.js`
+- URL en ejecución (modo `nocrafty`): `http://localhost:8088`
+
+Este esqueleto está preparado para conectar un backend (API) que ejecute los scripts (`create_server`, `stack`, `manage_server`, `backup`).
+
+## 11) Dónde ver más detalle
 
 - `README.md`
 - `docs/USO_PROYECTO.md`

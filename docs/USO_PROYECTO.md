@@ -38,7 +38,12 @@ La siguiente imagen resume el flujo recomendado del proyecto (usuario → panel 
    ```bash
    scripts/stack.sh up nocrafty
    ```
-5. Comandos admin:
+5. UI Esqueleto (visualización/administración):
+   ```bash
+   # al levantar modo nocrafty
+   # abrir: http://localhost:8088
+   ```
+6. Comandos admin:
    ```bash
    scripts/manage_server.sh op TuUsuario
    scripts/manage_server.sh give TuUsuario diamond 16
