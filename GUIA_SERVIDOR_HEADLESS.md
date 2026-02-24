@@ -13,6 +13,7 @@ Esta guía quedó sintetizada para uso real: crear, optimizar y operar servidore
 - `scripts/backup.sh`: backup con retención.
 - `scripts/ha_event.sh`: eventos a Home Assistant.
 - `scripts/validate_project.sh`: validación integral del proyecto.
+- `scripts/run_admin_ui.sh`: ejecutable refinado para levantar panel admin (nocrafty).
 - `web/index.html`: esqueleto de página de visualización/administración (modo no-Crafty).
 
 ## 2) Modo Crafty vs no-Crafty
@@ -108,6 +109,11 @@ HA_WEBHOOK_URL="https://ha.tudominio/api/webhook/mc_event" \
 ```
 
 ## 10) Esqueleto de página de visualización y administración
+
+Atajo recomendado:
+```bash
+scripts/run_admin_ui.sh
+```
 
 - Ruta: `web/index.html`
 - Estilos: `web/styles.css`

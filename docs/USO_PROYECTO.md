@@ -19,8 +19,15 @@ La siguiente imagen resume el flujo recomendado del proyecto (usuario → panel 
 - `scripts/backup.sh`: backup con retención.
 - `scripts/ha_event.sh`: eventos hacia Home Assistant.
 - `scripts/validate_project.sh`: chequeo integral del proyecto.
+- `scripts/run_admin_ui.sh`: ejecutable refinado todo-en-uno para panel admin.
 
 ## Flujo recomendado
+
+Atajo todo-en-uno:
+```bash
+scripts/run_admin_ui.sh
+```
+
 
 1. Validar dependencias:
    ```bash

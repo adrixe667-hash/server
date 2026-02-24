@@ -14,6 +14,8 @@ cp .env.example .env
 scripts/quickstart.sh
 scripts/create_server.sh mc-survival PAPER 6G 25565 nocrafty
 scripts/stack.sh up nocrafty
+# ejecutable refinado (todo en uno):
+scripts/run_admin_ui.sh
 ```
 
 Esqueleto UI de administración:
@@ -24,6 +26,14 @@ Esqueleto UI de administración:
 ```bash
 scripts/validate_project.sh
 ```
+
+## Ejecutable refinado
+
+```bash
+scripts/run_admin_ui.sh
+```
+
+Arranca la experiencia de administración no-Crafty con validaciones, progreso y endpoints.
 
 ## Documentación
 
