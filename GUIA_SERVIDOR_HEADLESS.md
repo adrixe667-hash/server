@@ -94,7 +94,7 @@ La interfaz debería incluir estos módulos:
    - Consola web en vivo.
 
 3. **Configuración**
-   - Variables de entorno (RAM, versión, tipo: Paper/Purpur/Fabric/Forge).
+   - Variables de entorno (RAM, versión, tipo: Paper/Purpur/Fabric/NeoFabric/NeoForge/Forge).
    - Edición de archivos (`server.properties`, `ops.json`, whitelist, etc.).
    - Programación de reinicios y tareas.
 
@@ -199,6 +199,17 @@ services:
 
 ---
 
+## Compatibilidad específica: Fabric, NeoFabric y NeoForge
+
+Para cubrir tu requisito de compatibilidad:
+
+- **Fabric**: usar servidor compatible con Fabric Loader + API/mods de la misma versión de Minecraft.
+- **NeoFabric**: validar que el modpack y las librerías estén preparadas para NeoFabric y versión exacta del loader.
+- **NeoForge**: usar build de NeoForge alineado con la versión del servidor y dependencias del modpack.
+- En el panel, define plantillas separadas por loader para evitar mezclar mods incompatibles entre Fabric/NeoFabric/NeoForge.
+
+---
+
 ## 6) Configuración y personalización (checklist)
 
 Para una experiencia realmente “tipo Crafty”:
@@ -212,7 +223,7 @@ Para una experiencia realmente “tipo Crafty”:
 - [ ] Sistema de tareas programadas (backup/restart/update).
 - [ ] Control de acceso por usuarios y roles.
 - [ ] Soporte de skins personalizadas con política configurable por servidor.
-- [ ] Compatibilidad de mods validada por versión y tipo de loader (Forge/Fabric/NeoForge).
+- [ ] Compatibilidad de mods validada por versión y tipo de loader (Fabric/NeoFabric/NeoForge/Forge).
 - [ ] Logs centralizados y exportables.
 
 ---
