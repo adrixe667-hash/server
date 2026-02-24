@@ -1,0 +1,4 @@
+.env
+monitoring/grafana/
+data/
+backups/

@@ -8,6 +8,18 @@ Base de referencia solicitada:
 
 ---
 
+
+## Implementación incluida en este repositorio
+
+Además de la guía, este repositorio ya incluye una base funcional:
+
+- `docker-compose.yml` (Minecraft + panel + monitoreo)
+- `.env.example` (configuración editable)
+- `monitoring/prometheus.yml` (métricas)
+- `scripts/quickstart.sh` (inicio rápido)
+- `scripts/manage_server.sh` (start/stop/restart + comandos admin OP/deOP/give/kick/ban/mute)
+- `scripts/backup.sh` (backup con retención)
+
 ## 1) Objetivo real de la plataforma
 
 Construir una solución que se comporte “como Crafty”, es decir:

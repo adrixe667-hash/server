@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: ${MC_NAME}
+    environment:
+      EULA: "TRUE"
+      TYPE: ${MC_TYPE}
+      VERSION: ${MC_VERSION}
+      MEMORY: ${MC_MEMORY}
+      ONLINE_MODE: ${MC_ONLINE_MODE}
+      ENABLE_WHITELIST: ${MC_ENABLE_WHITELIST}
+      TZ: ${TZ}
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "change-me-now"
+    ports:
+      - "${MC_PORT}:25565"
+    volumes:
+      - ./data/${MC_NAME}:/data
+    restart: unless-stopped
+
+  # Panel web amigable para administración base
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: panel-portainer
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    restart: unless-stopped
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+    volumes:
+      - ./monitoring/grafana:/var/lib/grafana
+    restart: unless-stopped
