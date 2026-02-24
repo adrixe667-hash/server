@@ -1,5 +1,13 @@
 # Uso del proyecto (ordenado y funcional)
 
+## Ejemplo visual de flujo
+
+La siguiente imagen resume el flujo recomendado del proyecto (usuario → panel → contenedores → observabilidad/seguridad/backups):
+
+![Flujo de la plataforma tipo Crafty](assets/flujo_ejemplo.svg)
+
+> Si quieres usar tu imagen personalizada, reemplaza `docs/assets/flujo_ejemplo.svg` por tu PNG/JPG y conserva el mismo nombre.
+
 ## Estructura
 
 - `docker-compose.yml`: servicios principales con perfiles.
@@ -10,6 +18,7 @@
 - `scripts/manage_server.sh`: comandos admin Minecraft.
 - `scripts/backup.sh`: backup con retención.
 - `scripts/ha_event.sh`: eventos hacia Home Assistant.
+- `scripts/validate_project.sh`: chequeo integral del proyecto.
 
 ## Flujo recomendado
 
@@ -43,4 +52,3 @@
 ## Compatibilidad de nombre
 
 El nombre de servidor debe cumplir: `^[a-z0-9-]+$`
-

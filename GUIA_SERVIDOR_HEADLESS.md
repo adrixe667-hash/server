@@ -12,6 +12,7 @@ Esta guía quedó sintetizada para uso real: crear, optimizar y operar servidore
 - `scripts/manage_server.sh`: comandos admin (OP, deOP, give, kick, ban, mute).
 - `scripts/backup.sh`: backup con retención.
 - `scripts/ha_event.sh`: eventos a Home Assistant.
+- `scripts/validate_project.sh`: validación integral del proyecto.
 
 ## 2) Modo Crafty vs no-Crafty
 
@@ -24,6 +25,9 @@ Esta guía quedó sintetizada para uso real: crear, optimizar y operar servidore
 - Más ligero para VPS pequeños.
 
 ## 3) Flujo de creación del servidor
+
+![Flujo de la plataforma tipo Crafty](docs/assets/flujo_ejemplo.svg)
+
 
 ```bash
 scripts/check_dependencies.sh

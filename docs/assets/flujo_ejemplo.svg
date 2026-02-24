@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f6f8fb"/>
+  <text x="600" y="40" text-anchor="middle" font-size="30" font-family="Arial" fill="#1f4b2e" font-weight="700">Flujo ejemplo plataforma tipo Crafty (resumen)</text>
+
+  <rect x="60" y="100" width="240" height="110" rx="14" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="180" y="145" text-anchor="middle" font-size="24" font-family="Arial" fill="#1e3a8a">Usuario / Admin</text>
+  <text x="180" y="175" text-anchor="middle" font-size="16" font-family="Arial" fill="#1e3a8a">Web / SSH</text>
+
+  <rect x="360" y="90" width="460" height="150" rx="16" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="590" y="130" text-anchor="middle" font-size="30" font-family="Arial" fill="#166534" font-weight="700">Panel web amigable</text>
+  <text x="590" y="165" text-anchor="middle" font-size="18" font-family="Arial" fill="#166534">Crafty o Portainer + scripts</text>
+  <text x="590" y="195" text-anchor="middle" font-size="16" font-family="Arial" fill="#166534">crear • encender • reiniciar • backups</text>
+
+  <rect x="880" y="100" width="260" height="150" rx="14" fill="#e0e7ff" stroke="#4f46e5"/>
+  <text x="1010" y="135" text-anchor="middle" font-size="24" font-family="Arial" fill="#312e81" font-weight="700">Observabilidad</text>
+  <text x="900" y="170" font-size="16" font-family="Arial" fill="#312e81">• Prometheus</text>
+  <text x="900" y="195" font-size="16" font-family="Arial" fill="#312e81">• Node Exporter</text>
+  <text x="900" y="220" font-size="16" font-family="Arial" fill="#312e81">• Grafana</text>
+
+  <rect x="250" y="320" width="700" height="250" rx="16" fill="#fff" stroke="#9ca3af"/>
+  <text x="600" y="355" text-anchor="middle" font-size="26" font-family="Arial" fill="#111827" font-weight="700">Docker Compose</text>
+  <rect x="290" y="390" width="180" height="140" rx="12" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="380" y="445" text-anchor="middle" font-size="22" font-family="Arial" fill="#92400e">Minecraft</text>
+  <text x="380" y="475" text-anchor="middle" font-size="14" font-family="Arial" fill="#92400e">modos: Paper/Fabric/NeoForge</text>
+
+  <rect x="510" y="390" width="180" height="140" rx="12" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="600" y="445" text-anchor="middle" font-size="22" font-family="Arial" fill="#92400e">Terraria</text>
+  <text x="600" y="475" text-anchor="middle" font-size="14" font-family="Arial" fill="#92400e">u otros juegos</text>
+
+  <rect x="730" y="390" width="180" height="140" rx="12" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="820" y="445" text-anchor="middle" font-size="22" font-family="Arial" fill="#92400e">Valheim</text>
+  <text x="820" y="475" text-anchor="middle" font-size="14" font-family="Arial" fill="#92400e">/etc</text>
+
+  <rect x="60" y="320" width="160" height="250" rx="14" fill="#ecfccb" stroke="#65a30d"/>
+  <text x="140" y="355" text-anchor="middle" font-size="22" font-family="Arial" fill="#3f6212" font-weight="700">Incluido</text>
+  <text x="75" y="390" font-size="14" font-family="Arial" fill="#3f6212">• docker-compose.yml</text>
+  <text x="75" y="415" font-size="14" font-family="Arial" fill="#3f6212">• .env.example</text>
+  <text x="75" y="440" font-size="14" font-family="Arial" fill="#3f6212">• create_server.sh</text>
+  <text x="75" y="465" font-size="14" font-family="Arial" fill="#3f6212">• stack.sh</text>
+  <text x="75" y="490" font-size="14" font-family="Arial" fill="#3f6212">• backup/manage</text>
+
+  <rect x="970" y="320" width="170" height="250" rx="14" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="1055" y="355" text-anchor="middle" font-size="22" font-family="Arial" fill="#14532d" font-weight="700">Backups</text>
+  <text x="985" y="390" font-size="14" font-family="Arial" fill="#14532d">• diarios</text>
+  <text x="985" y="415" font-size="14" font-family="Arial" fill="#14532d">• retención</text>
+  <text x="985" y="440" font-size="14" font-family="Arial" fill="#14532d">• restore 1-click</text>
+  <text x="985" y="480" font-size="14" font-family="Arial" fill="#14532d">Integración:</text>
+  <text x="985" y="505" font-size="14" font-family="Arial" fill="#14532d">• playit.gg</text>
+  <text x="985" y="530" font-size="14" font-family="Arial" fill="#14532d">• Tailscale</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0,0 8,4 0,8" fill="#f59e0b"/>
+    </marker>
+  </defs>
+  <line x1="300" y1="155" x2="355" y2="155" stroke="#f59e0b" stroke-width="5" marker-end="url(#arrow)"/>
+  <line x1="820" y1="170" x2="875" y2="170" stroke="#f59e0b" stroke-width="5" marker-end="url(#arrow)"/>
+  <line x1="590" y1="245" x2="590" y2="315" stroke="#22c55e" stroke-width="5" marker-end="url(#arrow)"/>
+</svg>

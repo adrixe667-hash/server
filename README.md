@@ -16,6 +16,12 @@ scripts/create_server.sh mc-survival PAPER 6G 25565 nocrafty
 scripts/stack.sh up nocrafty
 ```
 
+## Comprobación integral del proyecto
+
+```bash
+scripts/validate_project.sh
+```
+
 ## Documentación
 
 - `GUIA_SERVIDOR_HEADLESS.md`
