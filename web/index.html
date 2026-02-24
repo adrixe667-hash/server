@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crafty-Style Server Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <header class="topbar glass">
+    <div>
+      <h1>Plataforma de Servidores · Crafty Style</h1>
+      <p>Visualización, control y operación centralizada</p>
+    </div>
+    <div class="status-wrap">
+      <span class="pill ok">UI Online</span>
+      <span class="pill">API: <strong id="apiStatus">No conectada</strong></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar glass">
+      <h2>Acciones rápidas</h2>
+      <button data-action="create" class="btn green">+ Crear servidor</button>
+      <button data-action="start" class="btn">▶ Encender</button>
+      <button data-action="stop" class="btn">■ Apagar</button>
+      <button data-action="restart" class="btn">↻ Reiniciar</button>
+      <button data-action="backup" class="btn">🛡 Backup ahora</button>
+      <button data-action="validate" class="btn">✓ Validar proyecto</button>
+
+      <h3>Estado rápido</h3>
+      <ul>
+        <li>Modo: <strong id="modeValue">nocrafty</strong></li>
+        <li>Monitoreo: <strong id="monitoringValue">habilitado</strong></li>
+        <li>Home Assistant: <strong id="haValue">deshabilitado</strong></li>
+      </ul>
+    </aside>
+
+    <section class="content">
+      <section class="cards-row">
+        <article class="kpi glass">
+          <h4>Servidores</h4>
+          <p id="serversCount">0</p>
+        </article>
+        <article class="kpi glass">
+          <h4>CPU promedio</h4>
+          <p>--%</p>
+        </article>
+        <article class="kpi glass">
+          <h4>RAM usada</h4>
+          <p>-- GB</p>
+        </article>
+        <article class="kpi glass">
+          <h4>Backups hoy</h4>
+          <p>0</p>
+        </article>
+      </section>
+
+      <section class="panel glass">
+        <div class="panel-header">
+          <h2>Servidores administrados</h2>
+          <span class="badge">Compatibles: Paper/Fabric/NeoForge</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Puerto</th>
+              <th>Estado</th>
+              <th>CPU</th>
+              <th>RAM</th>
+            </tr>
+          </thead>
+          <tbody id="serversTable">
+            <tr><td colspan="6">Sin datos (conecta backend/API para poblar).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel glass">
+        <div class="panel-header">
+          <h2>Consola / Logs</h2>
+          <span class="badge muted">stream local</span>
+        </div>
+        <pre id="consoleOutput">[INFO] Listo. Conecta endpoints para ejecutar scripts del proyecto.</pre>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Diseño inspirado en paneles game-hosting (estilo Crafty). Integrar backend para acciones reales.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+version: "3.9"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: ${MC_NAME}
+    environment:
+      EULA: "TRUE"
+      TYPE: ${MC_TYPE}
+      VERSION: ${MC_VERSION}
+      MEMORY: ${MC_MEMORY}
+      ONLINE_MODE: ${MC_ONLINE_MODE}
+      ENABLE_WHITELIST: ${MC_ENABLE_WHITELIST}
+      TZ: ${TZ}
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      USE_AIKAR_FLAGS: ${USE_AIKAR_FLAGS}
+      JVM_XX_OPTS: ${JVM_XX_OPTS}
+      MAX_TICK_TIME: ${MAX_TICK_TIME}
+      VIEW_DISTANCE: ${VIEW_DISTANCE}
+      SIMULATION_DISTANCE: ${SIMULATION_DISTANCE}
+    ports:
+      - "${MC_PORT}:25565"
+    volumes:
+      - ./data/${MC_NAME}:/data
+    restart: unless-stopped
+
+  # Modo sin Crafty: panel liviano
+  portainer:
+    profiles: ["nocrafty"]
+    image: portainer/portainer-ce:latest
+    container_name: panel-portainer
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
+    restart: unless-stopped
+
+
+  # Esqueleto de página de visualización/administración
+  admin_ui:
+    profiles: ["nocrafty"]
+    image: nginx:alpine
+    container_name: admin-ui
+    ports:
+      - "8088:80"
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+  # Modo con Crafty: panel de gaming dedicado
+  crafty:
+    profiles: ["crafty"]
+    image: registry.gitlab.com/crafty-controller/crafty-4:latest
+    container_name: crafty
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8123:8123"
+      - "19132:19132/udp"
+      - "25500-25600:25500-25600"
+    volumes:
+      - ./data/crafty/backups:/crafty/backups
+      - ./data/crafty/logs:/crafty/logs
+      - ./data/crafty/servers:/crafty/servers
+      - ./data/crafty/config:/crafty/app/config
+      - ./data/crafty/import:/crafty/import
+    restart: unless-stopped
+
+  cadvisor:
+    profiles: ["monitoring"]
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    restart: unless-stopped
+
+  node_exporter:
+    profiles: ["monitoring"]
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  prometheus:
+    profiles: ["monitoring"]
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: unless-stopped
+
+  grafana:
+    profiles: ["monitoring"]
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+    volumes:
+      - ./monitoring/grafana:/var/lib/grafana
+    restart: unless-stopped
+
+  # Integración opcional para Home Assistant
+  mosquitto:
+    profiles: ["homeassistant"]
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+    restart: unless-stopped
