@@ -19,6 +19,30 @@ Además de la guía, este repositorio ya incluye una base funcional:
 - `scripts/quickstart.sh` (inicio rápido)
 - `scripts/manage_server.sh` (start/stop/restart + comandos admin OP/deOP/give/kick/ban/mute)
 - `scripts/backup.sh` (backup con retención)
+- `scripts/check_dependencies.sh` (verificación de dependencias)
+- `scripts/ha_event.sh` (envío de eventos a Home Assistant)
+
+## 0) Modos de uso (elige uno)
+
+### Modo A: Con Crafty (recomendado para interfaz completa)
+
+- Si ya usas Crafty, mantiene panel dedicado para instancias, consola y usuarios.
+- Puedes conservar este stack para monitoreo (Prometheus/Grafana) y túneles (playit/Cloudflare).
+- Recomendado cuando quieres experiencia 100% tipo panel de game hosting.
+
+### Modo B: Sin Crafty (ligero)
+
+- Usa Portainer + scripts (`manage_server.sh`, `backup.sh`, `quickstart.sh`).
+- Menos consumo y menos complejidad.
+- Recomendado para VPS pequeños o administración por SSH.
+
+### Compatibilidad del nombre del servidor/instancia
+
+Para evitar errores en Docker, backups y rutas:
+
+- Usa solo minúsculas, números y guiones: `a-z`, `0-9`, `-`
+- Evita espacios, tildes y símbolos especiales.
+- Ejemplos válidos: `mc-survival`, `fabric-1`, `neoforge-pvp`
 
 ## 1) Objetivo real de la plataforma
 
@@ -299,6 +323,27 @@ Para una experiencia realmente “tipo Crafty”:
 
 ---
 
+## Bibliotecas y complementos necesarios
+
+Dependencias mínimas del host:
+
+- `docker` y `docker compose`
+- `bash`, `tar`, `coreutils`
+- `curl` (webhooks y validaciones)
+
+Complementos recomendados para Minecraft:
+
+- **Permisos/roles**: LuckPerms
+- **Moderación/chat**: EssentialsX (mute/kick/ban más cómodo)
+- **Skins no-premium**: SkinRestorer
+- **Puente Java/Bedrock**: Geyser + Floodgate (si aplica)
+
+Integraciones opcionales:
+
+- **playit.gg** para exposición de puertos en CGNAT
+- **Cloudflare Tunnel** para panel web seguro
+- **Home Assistant** por webhook/MQTT para automatización
+
 ## 8) Servidores privados: buenas prácticas
 
 - Activar whitelist y lista de operadores.
@@ -341,6 +386,32 @@ Opciones recomendadas para exponer servidores privados/públicos:
 > Sugerencia práctica: usar Cloudflare Tunnel para el panel, y playit.gg o puertos directos solo para tráfico de juego.
 
 ---
+
+
+## Compatibilidad con Home Assistant
+
+Puedes integrar eventos del servidor con Home Assistant de dos formas:
+
+1. **Webhook**
+   - Usa `scripts/ha_event.sh` para enviar eventos (`server_up`, `server_down`, `backup_ok`, etc.).
+   - En Home Assistant crea una automatización por webhook y dispara notificaciones.
+
+2. **MQTT (opcional)**
+   - Publica estados en tópicos como `gameserver/minecraft/status`.
+   - Home Assistant puede leer esos tópicos para dashboards y alertas.
+
+Flujo recomendado:
+
+```bash
+scripts/check_dependencies.sh
+scripts/quickstart.sh
+```
+
+Ejemplo rápido de evento manual:
+
+```bash
+HA_WEBHOOK_URL="https://ha.tudominio/api/webhook/mc_event"   scripts/ha_event.sh server_up "Servidor iniciado"
+```
 
 ## 10) Integración con MineColab_Improved
 
