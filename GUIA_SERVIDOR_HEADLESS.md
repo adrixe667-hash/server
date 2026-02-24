@@ -126,7 +126,30 @@ La interfaz debería incluir estos módulos:
 
 ---
 
-## 5) Stack base Docker (panel + monitoreo + ejemplo Minecraft)
+## 5) Selector de opciones fácil para usuario (modo asistente)
+
+En la interfaz, agrega un asistente de 6 pasos con menús desplegables y presets:
+
+1. **Juego**: Minecraft Java / Minecraft Bedrock / Terraria / Valheim.
+2. **Tipo de servidor**: Vanilla / Paper / Purpur / Fabric / NeoFabric / NeoForge / Forge.
+3. **Modo de acceso**: Privado (whitelist) / Público.
+4. **Rendimiento**: Bajo (2G) / Medio (4G) / Alto (8G) / Extremo (12G+).
+5. **Red**: IP pública / playit.gg / Cloudflare Tunnel / Tailscale.
+6. **Seguridad**: 2FA panel, backup automático, anti-bot, logs de auditoría.
+
+### Botones recomendados (UX simple)
+- **Crear servidor**
+- **Aplicar plantilla**
+- **Encender**
+- **Apagar**
+- **Reiniciar**
+- **Abrir consola**
+- **Backup ahora**
+- **Restaurar backup**
+
+---
+
+## 6) Stack base Docker (panel + monitoreo + ejemplo Minecraft)
 
 ```yaml
 version: "3.9"
@@ -197,6 +220,42 @@ services:
     restart: unless-stopped
 ```
 
+### Código mejorado (plantillas con `.env` para uso fácil)
+
+Archivo `.env` sugerido:
+
+```env
+MC_NAME=mc-survival
+MC_TYPE=PAPER
+MC_VERSION=LATEST
+MC_MEMORY=6G
+MC_PORT=25565
+MC_ONLINE_MODE=TRUE
+MC_ENABLE_WHITELIST=TRUE
+```
+
+Bloque `minecraft` mejorado en `docker-compose.yml`:
+
+```yaml
+minecraft:
+  image: itzg/minecraft-server:latest
+  container_name: ${MC_NAME}
+  environment:
+    EULA: "TRUE"
+    TYPE: ${MC_TYPE}
+    VERSION: ${MC_VERSION}
+    MEMORY: ${MC_MEMORY}
+    ONLINE_MODE: ${MC_ONLINE_MODE}
+    ENABLE_WHITELIST: ${MC_ENABLE_WHITELIST}
+  ports:
+    - "${MC_PORT}:25565"
+  volumes:
+    - ./data/${MC_NAME}:/data
+  restart: unless-stopped
+```
+
+Con esto el usuario cambia opciones sin tocar YAML complejo.
+
 ---
 
 ## Compatibilidad específica: Fabric, NeoFabric y NeoForge
@@ -210,7 +269,7 @@ Para cubrir tu requisito de compatibilidad:
 
 ---
 
-## 6) Configuración y personalización (checklist)
+## 7) Configuración y personalización (checklist)
 
 Para una experiencia realmente “tipo Crafty”:
 
@@ -228,7 +287,7 @@ Para una experiencia realmente “tipo Crafty”:
 
 ---
 
-## 7) Servidores privados: buenas prácticas
+## 8) Servidores privados: buenas prácticas
 
 - Activar whitelist y lista de operadores.
 - Separar servidor público y privado en instancias distintas.
@@ -248,7 +307,7 @@ Para una experiencia realmente “tipo Crafty”:
 
 ---
 
-## 8) Publicación online y túneles compatibles
+## 9) Publicación online y túneles compatibles
 
 Opciones recomendadas para exponer servidores privados/públicos:
 
@@ -271,7 +330,7 @@ Opciones recomendadas para exponer servidores privados/públicos:
 
 ---
 
-## 9) Integración con MineColab_Improved
+## 10) Integración con MineColab_Improved
 
 Para migrar desde la base indicada:
 
@@ -285,7 +344,7 @@ Resultado: misma facilidad de uso, pero más robusto, portable y fácil de escal
 
 ---
 
-## 10) Comandos operativos rápidos
+## 11) Comandos operativos rápidos
 
 ```bash
 # Levantar toda la plataforma
@@ -306,7 +365,58 @@ tar -czf backups/mc-survival-$(date +%F-%H%M).tar.gz data/minecraft-survival
 
 ---
 
-## 11) Resumen final
+## 12) Instrucciones de uso (paso a paso para usuario final)
+
+1. **Abrir panel** en navegador (`https://TU-DOMINIO:9443` o dominio del proxy).
+2. **Crear instancia** con el botón `Crear servidor`.
+3. Elegir en el selector:
+   - juego,
+   - tipo (Paper/Fabric/NeoFabric/NeoForge/etc),
+   - RAM,
+   - modo privado/público.
+4. Pulsar **Aplicar plantilla** para cargar configuración base segura.
+5. Configurar administración:
+   - whitelist,
+   - operadores,
+   - permisos por rol en panel.
+6. Pulsar **Encender** para iniciar.
+7. Verificar en consola que no hay errores de mods/plugins.
+8. Probar conexión desde launcher compatible con la misma versión.
+9. Activar backup automático y alertas (CPU/RAM/caída).
+10. Operación diaria:
+    - **Reiniciar** para cambios de mods,
+    - **Apagar** antes de mantenimiento,
+    - **Backup ahora** antes de actualizaciones.
+
+---
+
+## 13) Dudas frecuentes (FAQ)
+
+**1) ¿Se puede compatibilidad total con todos los mods?**
+No al 100%. Depende de versión de Minecraft, loader (Fabric/NeoFabric/NeoForge/Forge), dependencias y conflictos entre mods.
+
+**2) ¿Qué hago si un mod no carga?**
+Revisar logs, confirmar versión exacta del loader, API requerida y librerías faltantes. Probar en plantilla limpia.
+
+**3) ¿Cómo activo skins personalizadas?**
+En premium usa autenticación oficial. En no-premium, habilita plugin/proxy compatible (ej. SkinRestorer) y define política de skins.
+
+**4) ¿playit.gg o Cloudflare Tunnel?**
+- playit.gg: muy práctico para puertos de juego con CGNAT.
+- Cloudflare Tunnel: ideal para panel web/API con HTTPS y ocultar IP.
+
+**5) ¿Cómo doy o quito OP rápido?**
+Desde panel en acciones admin o consola:
+- `/op <jugador>`
+- `/deop <jugador>`
+
+**6) ¿Cómo evitar que entren usuarios no autorizados?**
+Activa whitelist, usa roles mínimos, habilita 2FA en panel y limita puertos expuestos.
+
+---
+
+## 14) Resumen final
+
 
 Si buscas algo “como Crafty” pero adaptable a Minecraft y juegos similares:
 
